@@ -1,21 +1,22 @@
-const form = document.getElementById('reserveForm');
+document.getElementById("reserveForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let massage = document.getElementById("massage").value;
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
 
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const massage = document.getElementById('massage').value;
-    const date = document.getElementById('date').value;
-    const time = document.getElementById('time').value;
+  let text =
+    رزرو نوبت ماساژ\n\n +
+    نام: ${name}\n +
+    شماره: ${phone}\n +
+    نوع ماساژ: ${massage}\n +
+    تاریخ: ${date}\n +
+    ساعت: ${time};
 
-    if(!name  !phone  !massage  !date  !time){
-        alert("لطفاً همه فیلدها را پر کنید");
-        return;
-    }
+  let whatsappNumber = "989102624560"; // ← شماره خودت
+  let url = https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)};
 
-    const message = رزرو نوبت:\nنام: ${name}\nشماره: ${phone}\nخدمات: ${massage}\nتاریخ: ${date}\nساعت: ${time};
-    const url = https://wa.me/989102624560?text=${encodeURIComponent(message)}; // شماره واتساپت رو جایگزین کن
-
-    window.open(url, '_blank');
+  window.open(url, "_blank");
 });
