@@ -1,42 +1,34 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>Tanasa Massage</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Tanasa Massage</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="page">
+  <div class="card">
+    <h1>Tanasa Massage</h1>
+    <p class="subtitle">آرامش بدن، تجدید انرژی</p>
 
-        <div class="card">
-            <h1>Tanasa Massage</h1>
-            <p class="subtitle">آرامش، درمان، تجدید انرژی</p>
+    <form id="reserveForm">
+      <input type="text" id="name" placeholder="نام و نام خانوادگی" required>
+      <input type="tel" id="phone" placeholder="شماره تماس" required>
 
-            <div class="services">
-                <div class="service">
-                    <h3>ماساژ ریلکسی</h3>
-                    <p>۶۰ دقیقه – ۵۰۰ هزار تومان</p>
-                    <button>رزرو</button>
-                </div>
+      <select id="massage" required>
+        <option value="">انتخاب نوع ماساژ</option>
+        <option value="ماساژ ریلکسی">ماساژ ریلکسی</option>
+        <option value="ماساژ درمانی">ماساژ درمانی</option>
+        <option value="ماساژ سنگ داغ">ماساژ سنگ داغ</option>
+      </select>
 
-                <div class="service">
-                    <h3>ماساژ درمانی</h3>
-                    <p>۴۵ دقیقه – ۴۲۰ هزار تومان</p>
-                    <button>رزرو</button>
-                </div>
-            </div>
-        </div>
+      <input type="date" id="date" required>
+      <input type="time" id="time" required>
 
-    </div>
-<div class="reservation">
-    
+      <button type="submit">رزرو نوبت</button>
+    </form>
+  </div>
 
-
-</div>
-    <!-- JS -->
-    <script src="js/main.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
