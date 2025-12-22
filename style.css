@@ -78,3 +78,41 @@ button {
 button:hover {
     background: #444;
 }
+.reservation {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.reservation h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#reserveForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: auto;
+}
+
+#reserveForm input,
+#reserveForm select,
+#reserveForm button {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#reserveForm button {
+    background: #222;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#reserveForm button:hover {
+    background: #444;
+}
