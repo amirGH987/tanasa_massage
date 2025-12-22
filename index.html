@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>Tanasa Massage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- هدر -->
+  <header class="hero">
+    <h1>Tanasa Massage</h1>
+    <p>آرامش، درمان، تجدید انرژی</p>
+    <a href="#services" class="btn-primary">مشاهده خدمات</a>
+  </header>
+
+  <!-- خدمات -->
+  <section id="services">
+    <h2>خدمات ماساژ</h2>
+
+    <div class="service-card">
+      <h3>ماساژ ریلکسی</h3>
+      <p>کاهش استرس و آرامش کامل بدن</p>
+      <button type="button" class="reserve-btn" data-massage="ماساژ ریلکسی">
+        رزرو
+      </button>
+    </div>
+
+  </section>
+
+  <!-- فرم رزرو -->
+  <section id="reserve">
+    <h2>رزرو نوبت</h2>
+
+    <form id="reserveForm">
+      <input type="text" id="name" placeholder="نام شما" required>
+      <input type="tel" id="phone" placeholder="شماره تماس" required>
+
+      <select id="massage" required>
+        <option value="">انتخاب نوع ماساژ</option>
+        <option value="ماساژ ریلکسی">ماساژ ریلکسی</option>
+      </select>
+
+      <input type="date" id="date" required>
+      <input type="time" id="time" required>
+
+      <button type="submit">ثبت رزرو</button>
+    </form>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
