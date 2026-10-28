@@ -1,34 +1,743 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>Tanasa Massage</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آزمایشگاه مخفی ستیا 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --pink: #ff8fba;
+  --pink-dark: #e85f98;
+  --light-pink: #fff0f6;
+  --lilac: #c7b5ff;
+  --purple: #8d72d9;
+  --white: #fffdfd;
+  --text: #624b69;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, #fff0f6, #f3edff, #fff8fc);
+  overflow-x: hidden;
+}
+
+button, input { font: inherit; }
+
+button {
+  cursor: pointer;
+  border: none;
+  transition: .25s;
+}
+
+button:hover { transform: translateY(-3px) scale(1.02); }
+
+.background-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.float-heart {
+  position: absolute;
+  bottom: -50px;
+  opacity: .4;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+}
+
+header {
+  text-align: center;
+  padding: 25px 12px 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--pink-dark);
+}
+
+.subtitle { font-size: .9rem; opacity: .8; }
+
+.progress-wrap {
+  width: min(650px, 90%);
+  margin: 15px auto;
+  height: 9px;
+  border-radius: 30px;
+  background: #ffffffb5;
+  overflow: hidden;
+  border: 1px solid #f6d9e8;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--pink), var(--lilac));
+  border-radius: 30px;
+  transition: width .5s;
+}
+
+main {
+  width: min(720px, 92%);
+  margin: 12px auto 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: #ffffffdb;
+  border: 1px solid #ffffff;
+  box-shadow: 0 15px 45px #c49abb28;
+  border-radius: 28px;
+  padding: clamp(20px, 5vw, 38px);
+  min-height: 390px;
+  animation: appear .45s ease;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stage-label {
+  color: var(--pink-dark);
+  background: var(--light-pink);
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 30px;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+h1, h2 { line-height: 1.8; }
+
+h1 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  margin: 15px 0 10px;
+}
+
+h2 { font-size: 1.35rem; }
+
+p {
+  line-height: 2.15;
+  font-size: 1rem;
+}
+
+.big-emoji {
+  text-align: center;
+  font-size: 4rem;
+  margin: 10px 0;
+  animation: bob 2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  50% { transform: translateY(-8px) rotate(4deg); }
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 25px;
+}
+
+.btn {
+  padding: 12px 21px;
+  border-radius: 16px;
+  font-weight: 700;
+}
+
+.primary {
+  color: white;
+  background: linear-gradient(135deg, var(--pink-dark), #b99cff);
+  box-shadow: 0 7px 18px #d889ba35;
+}
+
+.secondary {
+  background: #f5efff;
+  color: #775cb5;
+}
+
+.option-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.option {
+  text-align: right;
+  background: #fff7fb;
+  color: var(--text);
+  border: 1px solid #f5dbea;
+  border-radius: 15px;
+  padding: 13px 16px;
+}
+
+.option:hover { background: #f8edff; }
+
+.option.correct {
+  background: #e5faee;
+  border-color: #92d6ad;
+}
+
+.option.wrong {
+  background: #fff0f0;
+  border-color: #f1aaaa;
+}
+
+.feedback {
+  display: none;
+  padding: 14px;
+  border-radius: 15px;
+  background: #f8f2ff;
+  line-height: 2;
+  margin-top: 15px;
+}
+
+.note {
+  background: linear-gradient(135deg, #fff2f8, #f5f0ff);
+  border-right: 4px solid var(--pink);
+  padding: 15px;
+  border-radius: 14px;
+  line-height: 2.1;
+  margin: 18px 0;
+}
+
+.meter {
+  background: #f0e8fa;
+  height: 18px;
+  border-radius: 30px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.meter-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff8fba, #b6a0ff);
+  transition: width .5s;
+  border-radius: 30px;
+}
+
+.secret-input {
+  width: 100%;
+  border: 2px solid #eadcfb;
+  background: #fffaff;
+  padding: 13px;
+  border-radius: 13px;
+  outline: none;
+  margin: 10px 0;
+}
+
+.secret-input:focus { border-color: var(--pink); }
+
+.letter {
+  white-space: pre-line;
+  background: #fff8fc;
+  border: 1px dashed #edacd0;
+  border-radius: 20px;
+  padding: 20px;
+  line-height: 2.3;
+}
+
+footer {
+  text-align: center;
+  font-size: .8rem;
+  padding: 10px 15px 25px;
+  opacity: .75;
+  position: relative;
+  z-index: 1;
+}
+
+.small { font-size: .88rem; opacity: .8; }
+
+.center { text-align: center; }
+
+.pill {
+  display: inline-block;
+  background: #f3edff;
+  color: #8267be;
+  padding: 7px 12px;
+  margin: 4px;
+  border-radius: 30px;
+  font-size: .85rem;
+}
+
+.hidden { display: none !important; }
+
+@media(max-width: 480px) {
+  .card { min-height: 420px; border-radius: 23px; }
+  .btn { width: 100%; }
+  .buttons { flex-direction: column; }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Tanasa Massage</h1>
-    <p class="subtitle">آرامش بدن، تجدید انرژی</p>
+<div class="background-hearts" id="hearts"></div>
 
-    <form id="reserveForm">
-      <input type="text" id="name" placeholder="نام و نام خانوادگی" required>
-      <input type="tel" id="phone" placeholder="شماره تماس" required>
-
-      <select id="massage" required>
-        <option value="">انتخاب نوع ماساژ</option>
-        <option value="ماساژ ریلکسی">ماساژ ریلکسی</option>
-        <option value="ماساژ درمانی">ماساژ درمانی</option>
-        <option value="ماساژ سنگ داغ">ماساژ سنگ داغ</option>
-      </select>
-
-      <input type="date" id="date" required>
-      <input type="time" id="time" required>
-
-      <button type="submit">رزرو نوبت</button>
-    </form>
+<header>
+  <div class="logo">🧪 آزمایشگاه مخفی ستیا 💗</div>
+  <div class="subtitle">پرونده‌ای محرمانه درباره‌ی یک جوجه‌ی خاص و یک گودزیلای مشکوک</div>
+  <div class="progress-wrap">
+    <div class="progress" id="progress"></div>
   </div>
+  <div class="small" id="stageCounter">مرحله‌ی ۱ از ۱۰</div>
+</header>
 
-  <script src="script.js"></script>
+<main>
+  <section class="card" id="app"></section>
+</main>
+
+<footer>
+  ساخته‌شده با کمی شیمی، کلی ذوق و یک عالمه قلب صورتی 💗
+</footer>
+
+<script>
+const app = document.getElementById('app');
+const progress = document.getElementById('progress');
+const stageCounter = document.getElementById('stageCounter');
+
+let stage = 0;
+let energy = 0;
+let quizScore = 0;
+let secretUnlocked = false;
+
+function hearts() {
+  const container = document.getElementById('hearts');
+  const icons = ['💗', '♡', '✨', '🌸', '💖'];
+
+  for (let i = 0; i < 22; i++) {
+    const heart = document.createElement('span');
+    heart.className = 'float-heart';
+    heart.textContent = icons[Math.floor(Math.random() * icons.length)];
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.fontSize = (12 + Math.random() * 22) + 'px';
+    heart.style.animationDuration = (8 + Math.random() * 13) + 's';
+    heart.style.animationDelay = (-Math.random() * 15) + 's';
+    container.appendChild(heart);
+  }
+}
+
+hearts();
+
+function updateProgress() {
+  progress.style.width = ((stage + 1) / 10 * 100) + '%';
+  stageCounter.textContent = `مرحله‌ی ${stage + 1} از ۱۰`;
+}
+
+function go(next) {
+  stage = Math.max(0, Math.min(9, next));
+  render();
+}
+
+function nextButton(text = 'بریم مرحله‌ی بعدی 💗') {
+  return `<div class="buttons"><button class="btn primary" onclick="go(${stage + 1})">${text}</button></div>`;
+}
+
+function optionQuiz(question, options, correct, explanation) {
+  return `
+    <h2>${question}</h2>
+    <div class="option-list">
+      ${options.map((option, i) =>
+        `<button class="option" onclick="answer(this, ${i}, ${correct}, '${explanation}')">${option}</button>`
+      ).join('')}
+    </div>
+    <div class="feedback" id="feedback"></div>
+  `;
+}
+
+function answer(button, chosen, correct, explanation) {
+  const buttons = button.parentElement.querySelectorAll('.option');
+  buttons.forEach(b => b.disabled = true);
+
+  if (chosen === correct) {
+    button.classList.add('correct');
+    quizScore++;
+    document.getElementById('feedback').innerHTML =
+      'آفرین! 🥳 جواب درست بود. ' + explanation;
+  } else {
+    button.classList.add('wrong');
+    buttons[correct].classList.add('correct');
+    document.getElementById('feedback').innerHTML =
+      'اوه اوه، جواب درست رو هم پیدا کردیم! 😌 ' + explanation;
+  }
+
+  document.getElementById('feedback').style.display = 'block';
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'buttons';
+  wrapper.innerHTML = `<button class="btn primary" onclick="go(${stage + 1})">ادامه‌ی پرونده 💌</button>`;
+  document.getElementById('feedback').after(wrapper);
+}
+
+const stages = [
+
+/* 1 */
+() => `
+  <div class="stage-label">پرونده شماره ۰۰۱ · محرمانه</div>
+  <div class="big-emoji">💌</div>
+  <h1>سلام به صاحب این پرونده، ستیا!</h1>
+  <p>
+    خب خب... بالاخره پیدات شد! 😌💗
+    قبل از هر چیزی باید بدونی که وارد یک آزمایشگاه معمولی نشدی.
+    اینجا نه قرار است چیزی منفجر بشه، نه قرار است ازت امتحان سخت بگیرن؛
+    البته به‌جز امتحانِ تحمل کردن حرف‌های یک گودزیلای پرحرف!
+  </p>
+  <p>
+    این پرونده مخصوص توئه؛ ترکیبی از چند آزمایش شیمی، سؤال‌های بامزه،
+    چند اعتراف کوچولو و پیام‌هایی که شاید یک لبخند کوچیک روی صورتت بیارن.
+    پس آماده باش، دانشمند خانم! 🧪🌷
+  </p>
+  <div class="note">
+    <b>هشدار آزمایشگاه:</b>
+    ورود به این سایت ممکن است باعث لبخند ناگهانی، افزایش میزان کیوتی
+    و مشکوک شدن به یک جوجه‌ی خاص شود. 🐣
+  </div>
+  ${nextButton('ورود به آزمایشگاه 🧪')}
+`,
+
+/* 2 */
+() => `
+  <div class="stage-label">مرحله ۲ · شناسایی عنصر</div>
+  <div class="big-emoji">⚗️</div>
+  <h1>اگر ستیا یک عنصر شیمیایی بود...</h1>
+  <p>
+    دانشمندان سال‌هاست عناصر مختلف رو بررسی می‌کنن، اما ظاهراً یک عنصر
+    هنوز توی جدول تناوبی کشف نشده: عنصر «ستیا»! ویژگی‌های این عنصر عجیب
+    شامل ترکیب خاصی از مهربونی، شیطنت، لبخند و توانایی گیج کردن
+    یک گودزیلای بیچاره است.
+  </p>
+  <p>
+    طبق گزارش آزمایشگاه، نماد این عنصر احتمالاً <b>St</b> خواهد بود.
+    البته هنوز باید بررسی کنیم که آیا در دمای اتاق پایدار می‌مونه
+    یا با دیدن یک پیام بامزه فوراً به حالت ذوق‌زدگی تبدیل می‌شه! 😂
+  </p>
+  ${optionQuiz(
+    'کدوم ویژگی بیشتر به عنصر خیالی ستیا میاد؟',
+    ['واکنش‌پذیری با لبخند و مهربونی 💗', 'زنگ‌زدگی در هوای مرطوب', 'انجماد کامل در دمای اتاق', 'حل شدن در اسید سولفوریک'],
+    0,
+    'البته این یک عنصر خیالیه؛ ولی واکنش‌های شیمیایی واقعی هم می‌تونن با تغییر دما و شرایط تغییر کنن!'
+  )}
+`,
+
+/* 3 */
+() => `
+  <div class="stage-label">مرحله ۳ · واکنش‌های قلبی</div>
+  <div class="big-emoji">💓</div>
+  <h1>یک واکنش عجیب در حال رخ دادنه!</h1>
+  <p>
+    توی شیمی، وقتی دو ماده با هم برخورد می‌کنن، ممکنه واکنشی اتفاق بیفته.
+    بعضی واکنش‌ها گرما آزاد می‌کنن، بعضی نور تولید می‌کنن و بعضی هم
+    فقط رنگ محلول رو تغییر می‌دن.
+  </p>
+  <p>
+    اما توی آزمایشگاه ما یک اتفاق عجیب ثبت شده: هر بار که اسم ستیا
+    توی گزارش ظاهر می‌شه، تعداد قلب‌های صورتی بالا می‌ره!
+    هنوز معلوم نیست این واکنش گرمازاست یا دستگاه اندازه‌گیری زیادی
+    ذوق‌زده شده. احتمالاً باید دستگاه رو از گودزیلا دور کنیم. 🧌
+  </p>
+  ${optionQuiz(
+    'در یک واکنش گرماده، چه اتفاقی برای انرژی رخ می‌دهد؟',
+    ['انرژی به محیط آزاد می‌شود 🔥', 'انرژی همیشه نابود می‌شود', 'هیچ انرژی‌ای جابه‌جا نمی‌شود', 'همه‌ی مواد حتماً یخ می‌زنند'],
+    0,
+    'در واکنش گرماده، انرژی به محیط منتقل می‌شود و محیط می‌تواند گرم‌تر شود.'
+  )}
+`,
+
+/* 4 */
+() => `
+  <div class="stage-label">مرحله ۴ · ورود گودزیلا</div>
+  <div class="big-emoji">🧌🐣</div>
+  <h1>گودزیلا و جوجه وارد آزمایشگاه شدند!</h1>
+  <p>
+    گزارش فوری: گودزیلا🧌 وارد آزمایشگاه شده و ادعا می‌کنه که فقط برای
+    بررسی علمی اومده. ولی دوربین‌ها نشون می‌دن که پنج دقیقه‌ی گذشته رو
+    صرف نگاه کردن به یک جوجه🐣 کرده و گفته: «این موجود کوچولو چرا انقدر
+    کیوته؟ آیا از نظر علمی می‌شه یکی رو به خاطر کیوت بودن مقصر دونست؟»
+  </p>
+  <p>
+    جوجه هم فعلاً ساکته، ولی به نظر می‌رسه داره نقشه می‌کشه تا کل
+    آزمایشگاه رو تصاحب کنه. دانشمندان به این نتیجه رسیدن که خطرناک‌ترین
+    موجود اینجا نه گودزیلاست و نه مواد شیمیایی؛ بلکه یک جوجه‌ی
+    بیش‌ازحد بانمکه که با یک جیک همه رو تسلیم می‌کنه! 🐣
+  </p>
+  ${optionQuiz(
+    'کدوم گزینه یک تغییر شیمیایی واقعی رو توصیف می‌کنه؟',
+    ['زنگ زدن آهن', 'خرد شدن یک تکه گچ', 'ذوب شدن یخ', 'پاره شدن کاغذ'],
+    0,
+    'زنگ زدن آهن ماده‌ی جدیدی تولید می‌کند. بقیه‌ی گزینه‌ها عمدتاً تغییر فیزیکی‌اند.'
+  )}
+`,
+
+/* 5 */
+() => `
+  <div class="stage-label">مرحله ۵ · باتری انرژی</div>
+  <div class="big-emoji">🔋💖</div>
+  <h1>باتری ذوق و انرژی رو شارژ کن!</h1>
+  <p>
+    دانشمند عزیز، باتری آزمایشگاه تقریباً خالی شده و برای ادامه‌ی بررسی‌ها
+    به چند واحد انرژی مثبت نیاز داریم. هر بار که دکمه رو می‌زنی، باتری
+    مقداری شارژ می‌شه. هیچ برق واقعی‌ای مصرف نمی‌شه؛ فقط یک بازی کوچیکه
+    برای اینکه این پرونده کمی بامزه‌تر بشه.
+  </p>
+  <p>
+    هدف اینه که باتری رو به صد درصد برسونی. گودزیلا قول داده بعد از
+    شارژ کامل، به‌جای غرش کردن، یک «جیک جیک» محترمانه انجام بده.
+    البته هیچ‌کس نمی‌دونه آیا گودزیلا به قولش عمل می‌کنه یا نه. 😂
+  </p>
+  <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+  <div class="center" id="energyText">شارژ باتری: ۰٪</div>
+  <div class="buttons">
+    <button class="btn primary" onclick="charge()">شارژ انرژی ✨</button>
+  </div>
+  <div class="feedback" id="energyFeedback" style="display:block">
+    هر بار کلیک، ۲۰ درصد شارژ بیشتر! آماده‌ای؟
+  </div>
+  <div class="buttons">
+    <button class="btn secondary" id="energyNext" onclick="go(5)" disabled>
+      ادامه‌ی آزمایشگاه
+    </button>
+  </div>
+`,
+
+/* 6 */
+() => `
+  <div class="stage-label">مرحله ۶ · قفل مخفی</div>
+  <div class="big-emoji">🔐💌</div>
+  <h1>پیام مخفی فقط برای افراد مجاز!</h1>
+  <p>
+    به بخش محرمانه‌ی آزمایشگاه رسیدی. اینجا یک قفل دیجیتالی وجود داره
+    که با رمز مخصوص باز می‌شه. طبق یادداشت دانشمند قبلی، رمز به اسم
+    صاحب پرونده مربوطه. بله، همون کسی که از اول داستان همه‌چیز بهش
+    مربوط می‌شد: ستیا! 🌸
+  </p>
+  <p>
+    رمز رو وارد کن تا یادداشت پنهان باز بشه. اگر بار اول درست نشد،
+    نگران نباش؛ حتی دانشمندهای واقعی هم گاهی رمز رو اشتباه وارد می‌کنن.
+    فقط لطفاً گودزیلا رو مسئول رمزها نکن، چون احتمالاً رمز رو با
+    «روووووور» عوض می‌کنه! 🧌
+  </p>
+  <input class="secret-input" id="secretInput" placeholder="رمز مخفی را وارد کن..." />
+  <div class="buttons">
+    <button class="btn primary" onclick="unlockSecret()">باز کردن قفل 🔓</button>
+  </div>
+  <div class="feedback" id="secretFeedback"></div>
+  <div class="note hidden" id="secretNote">
+    💗 یادداشت محرمانه:
+    بعضی آدم‌ها لازم نیست کار عجیب‌وغریبی انجام بدن تا حضورشون
+    خاص باشه. گاهی همین که خودشون هستن، با تمام شیطنت‌ها و خنده‌هاشون،
+    برای ساختن یک خاطره‌ی قشنگ کافیه. این پیام کوچیک هم برای یادآوری
+    همین موضوع نوشته شده. 🐣🌷
+  </div>
+  <div class="buttons">
+    <button class="btn primary" onclick="go(6)">رفتن به مرحله‌ی بعد 💗</button>
+  </div>
+`,
+
+/* 7 */
+() => `
+  <div class="stage-label">مرحله ۷ · پیوندهای مولکولی</div>
+  <div class="big-emoji">🧬🌷</div>
+  <h1>چیزهایی که با فرمول توضیح داده نمی‌شن</h1>
+  <p>
+    توی شیمی، اتم‌ها می‌تونن با پیوندهای مختلف کنار هم قرار بگیرن.
+    پیوند یونی معمولاً از جاذبه‌ی بین یون‌های با بار مخالف شکل می‌گیره،
+    و در پیوند کووالانسی اتم‌ها الکترون‌ها رو به اشتراک می‌ذارن.
+  </p>
+  <p>
+    ولی توی زندگی واقعی، ارتباط آدم‌ها فرمول یکسانی نداره.
+    احترام، اعتماد، شنیدن حرف همدیگه و مهربونی چیزهایی هستن که
+    به رابطه‌ها معنا می‌دن. نه می‌شه همه‌شون رو با یک معادله خلاصه کرد،
+    نه می‌شه با یک عدد اندازه گرفت.
+  </p>
+  <p>
+    پس گزارش علمی امروز اینه: حتی اگر یک گودزیلا🧌 سعی کنه همه‌چیز رو
+    با معادله حل کنه، باز هم برای بعضی سؤال‌ها باید از مهربونی،
+    صبر و کمی شوخی استفاده کنه. 😌💗
+  </p>
+  ${optionQuiz(
+    'در پیوند کووالانسی، اتم‌ها چه کاری انجام می‌دهند؟',
+    ['الکترون‌ها را به اشتراک می‌گذارند', 'همیشه تمام الکترون‌ها را از دست می‌دهند', 'هسته‌های خود را مبادله می‌کنند', 'به‌طور حتم به فلز تبدیل می‌شوند'],
+    0,
+    'در پیوند کووالانسی، یک یا چند جفت الکترون بین اتم‌ها به اشتراک گذاشته می‌شود.'
+  )}
+`,
+
+/* 8 */
+() => `
+  <div class="stage-label">مرحله ۸ · معادله‌ی لبخند</div>
+  <div class="big-emoji">😊➕💗</div>
+  <h1>معادله‌ای که دانشمندان رو گیج کرد!</h1>
+  <p>
+    بعد از هفت مرحله آزمایش، دانشمندان به یک معادله‌ی خیالی رسیدن:
+    «یک لبخند کوچک + کمی مهربونی + شوخی به‌موقع = یک روز بهتر».
+    البته این فرمول علمی رسمی نیست، اما می‌تونه یادآوری کنه که
+    رفتارهای ساده گاهی روی حال‌وهوای اطرافیان اثر مثبت می‌ذارن.
+  </p>
+  <p>
+    گودزیلا🧌 می‌گه: «من فقط اومده بودم دمای محلول رو اندازه بگیرم،
+    چرا الان دارم به یک جوجه🐣 لبخند می‌زنم؟»
+    جوجه هم با اعتمادبه‌نفس کامل جیک می‌زنه، انگار که تمام این آزمایش
+    از اول نقشه‌ی خودش بوده. پرونده همچنان مشکوکه!
+  </p>
+  <div class="note">
+    سؤال مهم این مرحله: اگر امروز حتی یک اتفاق کوچیک باعث لبخندت شده،
+    همون اتفاق کوچیک هم ارزش ثبت شدن توی دفتر خاطرات رو داره. 🌸
+  </div>
+  ${optionQuiz(
+    'کدام مورد می‌تواند به بهتر شدن ارتباط بین آدم‌ها کمک کند؟',
+    ['گوش دادن و احترام گذاشتن', 'نادیده گرفتن همه‌ی حرف‌ها', 'مسخره کردن احساسات دیگران', 'وادار کردن دیگران به موافقت'],
+    0,
+    'گوش دادن و احترام گذاشتن به دیگران کمک می‌کند احساس کنند حرفشان شنیده می‌شود.'
+  )}
+`,
+
+/* 9 */
+() => `
+  <div class="stage-label">مرحله ۹ · اعترافات گودزیلا</div>
+  <div class="big-emoji">🧌💌</div>
+  <h1>یک اعتراف کاملاً محرمانه!</h1>
+  <p>
+    گودزیلا درخواست کرده این بخش از پرونده بدون حضور دوربین‌ها ثبت بشه.
+    بعد از بررسی‌های فراوان، بالاخره اعتراف کرده که ساختن این همه مرحله
+    فقط برای این بوده که ستیا یک تجربه‌ی بامزه داشته باشه.
+  </p>
+  <p>
+    می‌گه: «من که هیولا نیستم، فقط قیافه‌م یه‌کم جدیه! بعضی وقت‌ها
+    آدم دلش می‌خواد برای یکی یک چیز کوچیک و متفاوت درست کنه؛
+    نه برای اینکه حتماً جواب خاصی بگیره، بلکه چون ساختن یک خاطره‌ی
+    قشنگ خودش می‌تونه ارزشمند باشه.»
+  </p>
+  <p>
+    جوجه🐣 هم صورت‌جلسه رو با سه تا جیک تأیید کرده. مترجم جوجه می‌گه
+    معنی جیک‌ها این بوده: «پرونده رو ادامه بدین، من هنوز جایزه‌مو نگرفتم!»
+  </p>
+  <div class="note">
+    و یک یادآوری کوچولو: لازم نیست برای خاص بودن، همیشه بی‌نقص باشی.
+    آدم‌ها با ویژگی‌های واقعی‌شون، علایق و تفاوت‌هاشون شناخته می‌شن. 💗
+  </div>
+  ${nextButton('باز کردن نامه‌ی پایانی 💌')}
+`,
+
+/* 10 */
+() => `
+  <div class="stage-label">مرحله ۱۰ · پایان پرونده</div>
+  <div class="big-emoji">🌷💗🐣</div>
+  <h1>نامه‌ی آخر برای ستیا</h1>
+  <p>
+    خب ستیا، به آخر آزمایشگاه رسیدیم. از عنصر خیالی ستیا تا واکنش‌های
+    شیمیایی، از باتری انرژی تا اعترافات گودزیلا، این پرونده یک مسیر
+    کوچیک و رنگی بود که امیدوارم چند لحظه‌اش برات دوست‌داشتنی بوده باشه.
+  </p>
+  <div class="letter">
+ستیا جان 💗
+
+این چند مرحله شاید فقط چند صفحه‌ی کوچیک توی یک سایت باشن،
+اما پشتشون یک فکر ساده وجود داره: اینکه یک نفر بتونه چیزی متفاوت
+و بامزه ببینه و برای چند دقیقه از روزمرگی فاصله بگیره.
+
+امیدوارم روزهات پر از لحظه‌هایی باشه که بی‌دلیل لبخند می‌زنی،
+آدم‌هایی که با احترام و مهربونی کنارت هستن، و اتفاق‌های کوچیکی
+که بعدها یادآوریشون حالت رو خوب می‌کنه.
+
+یادت باشه لازم نیست همیشه قوی، کامل یا خوشحال به نظر برسی.
+هر کسی روزهای مختلفی داره و حق داره گاهی خسته باشه،
+اشتباه کنه، دوباره تلاش کنه و مسیر خودش رو پیدا کنه.
+
+اگر از این آزمایشگاه فقط یک چیز یادت بمونه، امیدوارم این باشه:
+مهربونی‌های کوچیک بی‌ارزش نیستن؛ گاهی یک پیام ساده،
+یک شوخی بامزه یا چند دقیقه وقت گذاشتن می‌تونه یک خاطره‌ی قشنگ بسازه.
+
+و در آخر، گودزیلا🧌 و جوجه🐣 رسماً اعلام می‌کنن که این پرونده
+با موفقیت به پایان رسیده! البته جوجه هنوز دنبال جایزه‌ست
+و گودزیلا هنوز نمی‌دونه چطور باید جیک‌جیک کنه. 😂
+
+با آرزوی روزهای روشن، خنده‌های واقعی و کلی اتفاق خوب،
+پایان پرونده‌ی آزمایشگاه مخفی ستیا 🌸
+  </div>
+  <div class="note">
+    نتیجه‌ی نهایی آزمایش:
+    <br>🧪 شیمی: بررسی شد
+    <br>💗 انرژی مثبت: شارژ شد
+    <br>🧌 گودزیلا: هنوز مشکوک
+    <br>🐣 جوجه: همچنان رئیس آزمایشگاه
+  </div>
+  <div class="center">
+    <span class="pill">پرونده: تکمیل‌شده</span>
+    <span class="pill">لبخند: امیدواریم فعال</span>
+    <span class="pill">جوجه: افسانه‌ای</span>
+  </div>
+  <div class="buttons">
+    <button class="btn primary" onclick="restart()">شروع دوباره از اول 🔁</button>
+  </div>
+`
+];
+
+function charge() {
+  energy = Math.min(100, energy + 20);
+  document.getElementById('meterFill').style.width = energy + '%';
+  document.getElementById('energyText').textContent = `شارژ باتری: ${energy}٪`;
+
+  const feedback = document.getElementById('energyFeedback');
+  if (energy < 100) {
+    feedback.textContent = 'عالیه! باتری داره شارژ می‌شه. یک بار دیگه بزن! ✨';
+  } else {
+    feedback.textContent = 'باتری صددرصد شارژ شد! گودزیلا قول داده غرغر نکنه... حداقل برای پنج دقیقه! 🧌💗';
+    document.getElementById('energyNext').disabled = false;
+  }
+}
+
+function unlockSecret() {
+  const input = document.getElementById('secretInput').value.trim().toLowerCase();
+  const feedback = document.getElementById('secretFeedback');
+  const note = document.getElementById('secretNote');
+
+  if (input === 'ستیا' || input === 'setia') {
+    secretUnlocked = true;
+    note.classList.remove('hidden');
+    feedback.style.display = 'block';
+    feedback.textContent = 'قفل باز شد! رمز درست بود، دانشمند عزیز! 🔓💗';
+  } else {
+    feedback.style.display = 'block';
+    feedback.textContent = 'رمز درست نیست! یک بار دیگه امتحان کن. راهنمایی: اسم صاحب پرونده است. 🌸';
+  }
+}
+
+function restart() {
+  stage = 0;
+  energy = 0;
+  quizScore = 0;
+  secretUnlocked = false;
+  render();
+}
+
+function render() {
+  updateProgress();
+  app.innerHTML = stages[stage]();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+render();
+</script>
+
 </body>
 </html>
+
